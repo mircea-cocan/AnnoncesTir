@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AnnoncesTir</string>
+    <string name="app_title">Annonce tir</string>
+    <string name="bt_declare_text">Annonce</string>
+    <string name="bt_count_text">Total</string>
+    <string name="bt_new_text">Nouveau</string>
+</resources>
