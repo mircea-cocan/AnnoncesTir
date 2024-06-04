@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import kotlin.math.*
 
 /**
@@ -18,15 +19,17 @@ class CountShootsView(context: Context, attrs: AttributeSet) : View(context, att
     private var xCenter: Float = width.toFloat() / 2 + x
     private var yCenter: Float = height.toFloat() / 2 + y
     private var radius: Float = squareSide / 5F
-    private var shootCount = arrayOf(1, 1, 5, 6, 8, 10, 21, 12, 9)
+
+    var shootsModel:ShootsModel = ShootsModel()
 
     init {
         linePaint.style = Paint.Style.STROKE
-        linePaint.color = Color.BLUE
-        linePaint.strokeWidth = 10F
+        linePaint.color = ResourcesCompat.getColor(getResources(), R.color.BlueJeans, null)
+
+        linePaint.strokeWidth = 15F
 
         textPaint.style = Paint.Style.FILL_AND_STROKE
-        textPaint.color = Color.RED
+        textPaint.color = ResourcesCompat.getColor(getResources(), R.color.Cerise, null)
         textPaint.textSize = 100F
         textPaint.textAlign = Paint.Align.CENTER
     }
@@ -149,8 +152,8 @@ class CountShootsView(context: Context, attrs: AttributeSet) : View(context, att
 
         for(i in 0..8)
         {
-            if(shootAreaX[i] > 0) {
-                canvas.drawText(shootCount[i].toString(),
+            if(shootsModel.shootCount[i] > 0) {
+                canvas.drawText(shootsModel.shootCount[i].toString(),
                     shootAreaX[i],
                     shootAreaY[i] - (textPaint.descent() + textPaint.ascent())/2,
                     textPaint)

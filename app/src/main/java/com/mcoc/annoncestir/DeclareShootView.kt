@@ -5,13 +5,16 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.toColor
 import kotlin.math.*
 
 /**
  * Main view
  */
 class DeclareShootView(context: Context, attrs: AttributeSet) : View(context, attrs)  {
-    private var paint: Paint = Paint()
+    private var linesPaint: Paint = Paint()
+    private var shootPaint: Paint = Paint()
     private var shootArea: Int = -1
     private var shootAreaX = arrayOf(0F)
     private var shootAreaY = arrayOf(0F)
@@ -20,11 +23,16 @@ class DeclareShootView(context: Context, attrs: AttributeSet) : View(context, at
     private var yCenter: Float = height.toFloat() / 2 + y
     private var radius: Float = squareSide / 5F
 
-    init {
-        paint.style = Paint.Style.STROKE
-        paint.color = Color.BLUE
-        paint.strokeWidth = 10F
+    public var shootsModel:ShootsModel = ShootsModel()
 
+    init {
+        linesPaint.style = Paint.Style.STROKE
+        linesPaint.color = ResourcesCompat.getColor(getResources(), R.color.AndroidGreen, null)
+        linesPaint.strokeWidth = 15F
+
+        shootPaint.style = Paint.Style.FILL_AND_STROKE
+        shootPaint.color = ResourcesCompat.getColor(getResources(), R.color.Cerise, null)
+        shootPaint.strokeWidth = 15F
     }
 
     /**
@@ -88,63 +96,63 @@ class DeclareShootView(context: Context, attrs: AttributeSet) : View(context, at
         }
 
 
-        canvas.drawRect(leftSquare, topSquare, rightSquare, bottomSquare, paint)
-        canvas.drawCircle(xCenter, yCenter, radius, paint)
+        canvas.drawRect(leftSquare, topSquare, rightSquare, bottomSquare, linesPaint)
+        canvas.drawCircle(xCenter, yCenter, radius, linesPaint)
 
         // Top
         canvas.drawLine(xCenter - lgExt,
             topSquare,
             xCenter - lgIntX,
             yCenter - lgIntY,
-            paint)
+            linesPaint)
 
         canvas.drawLine(xCenter + lgExt,
             topSquare,
             xCenter + lgIntX,
             yCenter - lgIntY,
-            paint)
+            linesPaint)
 
         //Bottom
         canvas.drawLine(xCenter - lgExt,
             bottomSquare,
             xCenter - lgIntX,
             yCenter + lgIntY,
-            paint)
+            linesPaint)
 
         canvas.drawLine(xCenter + lgExt,
             bottomSquare,
             xCenter + lgIntX,
             yCenter + lgIntY,
-            paint)
+            linesPaint)
 
         //Left
         canvas.drawLine(leftSquare,
             yCenter - lgExt,
             xCenter - lgIntY,
             yCenter - lgIntX,
-            paint)
+            linesPaint)
 
         canvas.drawLine(leftSquare,
             yCenter + lgExt,
             xCenter - lgIntY,
             yCenter + lgIntX,
-            paint)
+            linesPaint)
 
         //Right
         canvas.drawLine(rightSquare,
             yCenter - lgExt,
             xCenter + lgIntY,
             yCenter - lgIntX,
-            paint)
+            linesPaint)
 
         canvas.drawLine(rightSquare,
             yCenter + lgExt,
             xCenter + lgIntY,
             yCenter + lgIntX,
-            paint)
+            linesPaint)
 
         if(shootArea >= 0) {
-            canvas.drawCircle(shootAreaX[shootArea], shootAreaY[shootArea], radius/3, paint)
+            canvas.drawCircle(shootAreaX[shootArea], shootAreaY[shootArea], radius/3, shootPaint)
         }
     }
 
@@ -155,6 +163,7 @@ class DeclareShootView(context: Context, attrs: AttributeSet) : View(context, at
         when (event!!.action) {
             MotionEvent.ACTION_DOWN -> {
                 shootArea = checkShootArea(event.x, event.y)
+                shootsModel.AddShoot(shootArea)
                 invalidate()
             }
             MotionEvent.ACTION_UP ->

@@ -8,22 +8,38 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/appTitleView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:text="@string/app_title"
-        android:textAlignment="center"
+        android:gravity="center"
+        android:elegantTextHeight="true"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:background="@color/green"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:id="@+id/newShootsSerieBtn"
+        android:layout_below="@id/appTitleView"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:textSize="12sp"
+        android:text="@string/bt_new_text"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/newShootsSerieBtn"
+        android:layout_above="@id/fragmentDeclareBtn"/>
+
     
     <Button
         android:layout_width="120dp"
@@ -32,6 +48,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="50dp"
+        android:textSize="12sp"
         android:text="@string/bt_declare_text"/>
 
     <Button
@@ -42,15 +59,8 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="50dp"
+        android:textSize="12sp"
         android:text="@string/bt_count_text"/>
 
-    <Button
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:id="@+id/fragmentNewBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/bt_new_text"/>
+
 </RelativeLayout>

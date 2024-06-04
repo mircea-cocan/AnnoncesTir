@@ -6,5 +6,6 @@
 
     <com.mcoc.annoncestir.CountShootsView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/count_shoots_view"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
